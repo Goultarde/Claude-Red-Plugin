@@ -1,4 +1,4 @@
-![claude-red banner](.github/assets/banner.png)
+![claude-red banner](/assets/banner.png)
 
 # claude-red
 
