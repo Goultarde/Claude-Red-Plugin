@@ -1,0 +1,8 @@
+{
+  "name": "claude-red",
+  "description": "38 offensive security skills for red team operators — SQLi, XSS, SSRF, SSTI, XXE, exploit dev, EDR evasion, and more.",
+  "author": {
+    "name": "Goultarde",
+    "url": "https://github.com/Goultarde"
+  }
+}

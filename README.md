@@ -1,26 +1,46 @@
 ![claude-red banner](/assets/banner.png)
 
-# claude-red
+# claude-red (plugin fork)
 
-> 38 offensive security skills for Claude — drop-in SKILL.md files that turn Claude into a context-aware red team operator.
+> 38 offensive security skills for Claude — packaged as a native Claude Code plugin.
 
-Built by **[SnailSploit](https://snailsploit.com)** — GenAI Security Research.
+Fork of [SnailSploit/Claude-Red](https://github.com/SnailSploit/Claude-Red) by **[Goultarde](https://github.com/Goultarde)**.
 
 ---
 
-## What is this?
+## What changed from the original?
 
-`claude-red` is a curated library of offensive security skills designed for the [Claude skills system](https://docs.claude.com). Each skill is a structured `SKILL.md` file that primes Claude with expert-level methodology for a specific attack surface — from SQLi to shellcode, EDR evasion to exploit development.
+The original repo ships raw `SKILL.md` files with no plugin packaging — you had to manually pipe them into Claude via `--append-system-prompt` or a wrapper script.
 
-Drop any skill into your Claude environment and it behaves like a specialist: it knows the techniques, the tooling, the edge cases, and the escalation paths.
+This fork restructures the repo as a proper **Claude Code plugin**:
+
+- `Skills/` renamed to `skills/` (Claude Code plugin convention)
+- `.claude-plugin/plugin.json` added (plugin manifest)
+- `.claude-plugin/marketplace.json` added (marketplace manifest)
+
+Result: install once, skills available in every session via `/skills`.
+
+---
+
+## Installation
+
+```bash
+claude plugin marketplace add Goultarde/Claude-Red-Plugin
+claude plugin install claude-red
+```
+
+Restart Claude Code. All 38 skills appear in `/skills`.
 
 ---
 
 ## Structure
 
 ```
-claude-red/
-└── skills-output/
+Claude-Red-Plugin/
+├── .claude-plugin/
+│   ├── plugin.json
+│   └── marketplace.json
+└── skills/
     ├── offensive-sqli/
     │   └── SKILL.md
     ├── offensive-xss/
@@ -28,7 +48,7 @@ claude-red/
     └── ... (38 total)
 ```
 
-Each directory is a self-contained skill. Point Claude at the relevant `SKILL.md` before your engagement begins.
+Each directory is a self-contained skill invokable via `/offensive-<name>` in any Claude Code session.
 
 ---
 
@@ -111,14 +131,13 @@ Each directory is a self-contained skill. Point Claude at the relevant `SKILL.md
 
 ## Usage
 
-### With Claude Code
+### Claude Code (plugin - recommended)
 ```bash
-# Point Claude at a skill before starting your session
-cat skills-output/offensive-sqli/SKILL.md | claude --system-file -
+# After installation, invoke any skill in a session
+/offensive-sqli
+/offensive-xss
+/offensive-edr-evasion
 ```
-
-### With the Claude Skills System
-Place any skill folder under your configured skills path (e.g., `/mnt/skills/user/`) and Claude will auto-load it based on trigger keywords.
 
 ### Manual (Claude.ai)
 Paste the contents of any `SKILL.md` into a Project's system prompt or prepend it to your conversation.

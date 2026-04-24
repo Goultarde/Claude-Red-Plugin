@@ -1,0 +1,15 @@
+{
+  "name": "claude-red",
+  "owner": {
+    "name": "Goultarde",
+    "url": "https://github.com/Goultarde"
+  },
+  "plugins": [
+    {
+      "name": "claude-red",
+      "description": "38 offensive security skills — SQLi, XSS, SSRF, SSTI, XXE, exploit dev, EDR evasion, and more.",
+      "source": "./",
+      "category": "security"
+    }
+  ]
+}
